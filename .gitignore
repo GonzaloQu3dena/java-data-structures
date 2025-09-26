@@ -1,0 +1,9 @@
+.vscode/
+
+#macOS system files
+.DS_Store
+
+# Compiled files
+*.class
+target/
+build/
