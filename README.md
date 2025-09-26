@@ -25,13 +25,20 @@ This project provides a collection of fundamental data structures implemented in
 
 ```
 src/
-├── main/java/com/gqcod3/datastructures/
-│   ├── SinglyLinkedList.java    # Singly linked list implementation
-│   ├── DoublyLinkedList.java    # Doubly linked list implementation
-│   ├── CircularLinkedList.java  # Circular linked list implementation
-│   └── app/
-│       └── Main.java            # Example usage and demonstrations
-└── test/java/                   # Unit tests (to be implemented)
+├── main/
+│   ├── java/com/gqcod3/datastructures/
+│   │   ├── app/
+│   │   │   └── Main.java                    # Example usage and demonstrations
+│   │   └── lists/
+│   │       ├── singly/
+│   │       │   └── SinglyLinkedList.java    # Singly linked list implementation
+│   │       ├── doubly/
+│   │       │   └── DoublyLinkedList.java    # Doubly linked list implementation
+│   │       └── circular/
+│   │           └── CircularLinkedList.java  # Circular linked list implementation
+│   └── resources/                           # Resource files
+└── test/
+    └── java/                                # Unit tests (to be implemented)
 ```
 
 ## Data Structures
@@ -123,7 +130,7 @@ A linear data structure where the last node points back to the first node, creat
 ### Singly Linked List Example
 
 ```java
-import com.gqcod3.datastructures.SinglyLinkedList;
+import com.gqcod3.datastructures.lists.singly.SinglyLinkedList;
 
 // Create a new singly linked list for integers
 SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
@@ -154,7 +161,7 @@ System.out.println("Is empty: " + list.isEmpty());
 ### Doubly Linked List Example
 
 ```java
-import com.gqcod3.datastructures.DoublyLinkedList;
+import com.gqcod3.datastructures.lists.doubly.DoublyLinkedList;
 
 // Create a new doubly linked list for strings
 DoublyLinkedList<String> dList = new DoublyLinkedList<>();
@@ -190,7 +197,7 @@ System.out.println("Is empty: " + dList.isEmpty());
 ### Circular Linked List Example
 
 ```java
-import com.gqcod3.datastructures.CircularLinkedList;
+import com.gqcod3.datastructures.lists.circular.CircularLinkedList;
 
 // Create a new circular linked list for integers
 CircularLinkedList<Integer> cList = new CircularLinkedList<>();
