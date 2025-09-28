@@ -10,7 +10,8 @@ This project provides a collection of fundamental data structures implemented in
     <li><strong>Generic Type Support:</strong> All data structures support generic types for type safety and flexibility</li>
     <li><strong>Singly Linked List:</strong> Forward-only traversal with efficient insertion and search operations</li>
     <li><strong>Doubly Linked List:</strong> Bidirectional traversal with optimized insertion and deletion operations</li>
-    <li><strong>Circular Linked List:</strong> Circular structure with continuous traversal and lambda function support</li>
+    <li><strong>Circular Singly Linked List:</strong> Circular structure with continuous forward traversal</li>
+    <li><strong>Circular Doubly Linked List:</strong> Circular structure with bidirectional traversal and lambda function support</li>
     <li><strong>Well-documented API:</strong> Comprehensive JavaDoc documentation for all methods and classes</li>
     <li><strong>Exception Safety:</strong> Robust error handling and boundary condition management</li>
     <li><strong>Memory Efficient:</strong> Proper node management and garbage collection friendly</li>
@@ -28,17 +29,18 @@ src/
 ├── main/
 │   ├── java/com/gqcod3/datastructures/
 │   │   ├── app/
-│   │   │   └── Main.java                    # Example usage and demonstrations
+│   │   │   └── Main.java                         # Example usage and demonstrations
 │   │   └── lists/
 │   │       ├── singly/
-│   │       │   └── SinglyLinkedList.java    # Singly linked list implementation
+│   │       │   └── SinglyLinkedList.java         # Singly linked list implementation
 │   │       ├── doubly/
-│   │       │   └── DoublyLinkedList.java    # Doubly linked list implementation
+│   │       │   └── DoublyLinkedList.java         # Doubly linked list implementation
 │   │       └── circular/
-│   │           └── CircularLinkedList.java  # Circular linked list implementation
-│   └── resources/                           # Resource files
+│   │           ├── CircularSinglyLinkedList.java # Circular singly linked list implementation
+│   │           └── CircularDoublyLinkedList.java # Circular doubly linked list implementation
+│   └── resources/                                # Resource files
 └── test/
-    └── java/                                # Unit tests (to be implemented)
+    └── java/                                     # Unit tests (to be implemented)
 ```
 
 ## Data Structures
@@ -94,15 +96,44 @@ A linear data structure where each node contains data and references to both the
 - Search: O(n)
 - Access by index: O(n)
 
-### 3. Circular Linked List
+### 3. Circular Singly Linked List
 
-A linear data structure where the last node points back to the first node, creating a circular loop. This structure allows for continuous traversal and is particularly useful for round-robin scheduling and cyclic operations.
+A linear data structure where the last node points back to the first node, creating a circular loop with forward-only traversal. This structure allows for continuous traversal and is particularly useful for round-robin scheduling and cyclic operations.
 
 **Key Features:**
-- Generic type support (`CircularLinkedList<T>`)
-- Circular structure with continuous traversal
-- Lambda function support with `Consumer` and `Predicate` interfaces
+- Generic type support (`CircularSinglyLinkedList<T>`)
+- Circular structure with continuous forward traversal
 - Efficient insertion at both ends
+- Memory efficient with single pointer per node
+
+**Available Methods:**
+- `pushBack(T item)` - Add element to the end
+- `pushFront(T item)` - Add element to the beginning
+- `insertAt(T item, int pos)` - Insert element at specific position
+- `popBack()` - Remove element from the end
+- `popFront()` - Remove element from the beginning
+- `removeAt(int pos)` - Remove element at specific position
+- `isEmpty()` - Check if list is empty
+- `size()` - Get current size
+- `iterator()` - Print all elements
+
+**Time Complexity:**
+- Insertion (front/back): O(1)
+- Insertion (at position): O(n)
+- Deletion (back): O(n) - requires traversal to find previous node
+- Deletion (front): O(1)
+- Search: O(n)
+- Access by index: O(n)
+
+### 4. Circular Doubly Linked List
+
+A linear data structure where the last node points back to the first node and the first node points back to the last node, creating a circular loop with bidirectional traversal. This structure combines the benefits of both circular and doubly linked lists.
+
+**Key Features:**
+- Generic type support (`CircularDoublyLinkedList<T>`)
+- Circular structure with continuous bidirectional traversal
+- Lambda function support with `Consumer` and `Predicate` interfaces
+- Efficient insertion and deletion at both ends
 - Functional programming support for modern Java
 
 **Available Methods:**
@@ -110,18 +141,16 @@ A linear data structure where the last node points back to the first node, creat
 - `pushFront(T item)` - Add element to the beginning
 - `insertAt(T item, int pos)` - Insert element at specific position
 - `popBack()` - Remove element from the end
-- `popFront()` - Remove element from the beginning (TODO: implementation needed)
-- `removeAt(int pos)` - Remove element at specific position (TODO: implementation needed)
+- `popFront()` - Remove element from the beginning
+- `removeAt(int pos)` - Remove element at specific position
 - `isEmpty()` - Check if list is empty
 - `size()` - Get current size
 - `iterator(Consumer<T> action)` - Apply action to each element using lambda functions
 - `find(Predicate<T> predicate)` - Find element matching predicate using lambda functions
 
 **Time Complexity:**
-- Insertion (front/back): O(1)
-- Insertion (at position): O(n)
-- Deletion (back): O(n) - requires traversal to find previous node
-- Deletion (front): O(1) - when implemented
+- Insertion/Deletion (front/back): O(1)
+- Insertion/Deletion (at position): O(n) - optimized based on position
 - Search: O(n)
 - Access by index: O(n)
 
@@ -194,13 +223,40 @@ dList.removeAt(0);
 System.out.println("Is empty: " + dList.isEmpty()); 
 ```
 
-### Circular Linked List Example
+### Circular Singly Linked List Example
 
 ```java
-import com.gqcod3.datastructures.lists.circular.CircularLinkedList;
+import com.gqcod3.datastructures.lists.circular.CircularSinglyLinkedList;
 
-// Create a new circular linked list for integers
-CircularLinkedList<Integer> cList = new CircularLinkedList<>();
+// Create a new circular singly linked list for integers
+CircularSinglyLinkedList<Integer> csList = new CircularSinglyLinkedList<>();
+
+// Add elements
+csList.pushBack(10);
+csList.pushBack(20);
+csList.pushFront(5);
+csList.insertAt(15, 2);
+
+// Display the list
+System.out.println("All elements:");
+// Output: 5 -> 15 -> 10 -> 20 -> (circular)
+csList.iterator(); 
+
+// Remove elements
+csList.popBack();   // Remove 20
+csList.popFront();  // Remove 5
+
+// Check size
+System.out.println("Size: " + csList.size()); // Output: Size: 2
+```
+
+### Circular Doubly Linked List Example
+
+```java
+import com.gqcod3.datastructures.lists.circular.CircularDoublyLinkedList;
+
+// Create a new circular doubly linked list for integers
+CircularDoublyLinkedList<Integer> cList = new CircularDoublyLinkedList<>();
 
 // Add elements
 cList.pushBack(10);
@@ -279,14 +335,13 @@ cList.popBack();  // Remove 10
 ### Completed Features
 - ✅ Singly Linked List with full functionality
 - ✅ Doubly Linked List with most core operations
-- ✅ Circular Linked List with lambda function support
+- ✅ Circular Singly Linked List implementation
+- ✅ Circular Doubly Linked List with lambda function support
 - ✅ Generic type support
 - ✅ Comprehensive documentation
 - ✅ Example usage in Main.java
 
 ### In Progress
-- ⚠️ Circular Linked List `popFront()` method (TODO)
-- ⚠️ Circular Linked List `removeAt(int pos)` method (TODO)
 - ⚠️ Doubly Linked List `pushFront(T item)` method (TODO)
 
 ## Contributing
