@@ -97,6 +97,50 @@ public class DoublyLinkedList<T> {
     }
 
     /**
+     * Insert an item at a specific position in the list
+     * @param item Item to insert
+     * @param pos Position to insert the item
+     * @return true if the item was inserted successfully, false otherwise
+     */
+    public boolean insertAt(T item, int pos) {
+        if (pos < 0 || pos > size())
+            return false;
+        if (pos == 0)
+            return pushFront(item);
+        if (pos == size())
+            return pushBack(item);
+
+        int i = 0;
+        Node current = head;
+        Node newNode = new Node(item);
+
+        if (pos <= size() / 2) {
+            current = head;
+            while (i < pos) {
+                current = current.next;
+                i++;
+            }
+        } else {
+            current = tail;
+            i = size() - 1;
+            while (i >= pos) {
+                current = current.prev;
+                i--;
+            }
+        }
+
+        Node prev = current.prev;
+        prev.next = newNode;
+        newNode.prev = prev;
+
+        newNode.next = current;
+        current.prev = newNode;
+
+        size++;
+        return true;
+    }
+
+    /**
      * Remove an item to the end of the list
      * 
      * @return true if the item was deleted, false otherwise
