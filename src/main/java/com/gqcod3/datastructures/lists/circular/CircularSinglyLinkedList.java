@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * 
  * @param <T> Type of elements in the list
  */
-public class CircularLinkedList<T> {
+public class CircularSinglyLinkedList<T> {
 
     /**
      * Node class representing each element in the list
@@ -45,9 +45,9 @@ public class CircularLinkedList<T> {
     }
 
     /**
-     * Constructor to create an empty circular linked list
+     * Constructor to create an empty circular singlylinked list
      */
-    public CircularLinkedList() {
+    public CircularSinglyLinkedList() {
         head = null;
         tail = null;
         size = 0;
@@ -220,7 +220,7 @@ public class CircularLinkedList<T> {
     }
 
     /**
-     * Iterate through the list and print each item
+     * Iterate over the items in the list and perform the given action on each item
      */
     public void iterator(Consumer<T> action) {
         if (isEmpty())
