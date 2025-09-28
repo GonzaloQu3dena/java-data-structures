@@ -200,8 +200,23 @@ public class CircularLinkedList<T> {
         if (pos == size - 1)
             return popBack();
 
-        // TODO: Implement this method.
-        return false;
+        Node prev = null;
+        Node current = head;
+        
+        for (int i = 0; i < pos; i++) {
+            prev = current;
+            current = current.next;
+        }
+
+        try {
+            prev.next = current.next;
+            current.next = null;
+            size--;
+            return true;
+            
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
