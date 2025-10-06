@@ -4,6 +4,7 @@ import com.gqcod3.datastructures.lists.circular.CircularDoublyLinkedList;
 import com.gqcod3.datastructures.lists.circular.CircularSinglyLinkedList;
 import com.gqcod3.datastructures.lists.doubly.DoublyLinkedList;
 import com.gqcod3.datastructures.lists.singly.SinglyLinkedList;
+import com.gqcod3.datastructures.stack.LinkedStack;
 
 public class Main {
 
@@ -53,5 +54,15 @@ public class Main {
         System.out.println("\nCircular Doubly Linked List:");
         circularDoublyLinkedList.iterator(character -> System.out.print(character + " <-> "));
 
+        /**
+         * Stack Example
+         */
+        LinkedStack<String> stack = new LinkedStack<>();
+        stack.push("hello");
+        stack.push(null);      
+        stack.push("world");
+        
+        System.out.println("\nLinked Stack:");
+        stack.iterator(data -> System.out.print(data + " -> "));
     }
 }
