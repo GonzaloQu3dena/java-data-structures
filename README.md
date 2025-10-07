@@ -12,6 +12,8 @@ This project provides a collection of fundamental data structures implemented in
     <li><strong>Doubly Linked List:</strong> Bidirectional traversal with optimized insertion and deletion operations</li>
     <li><strong>Circular Singly Linked List:</strong> Circular structure with continuous forward traversal</li>
     <li><strong>Circular Doubly Linked List:</strong> Circular structure with bidirectional traversal and lambda function support</li>
+    <li><strong>Stack (LinkedStack):</strong> LIFO data structure with push, pop, and peek operations</li>
+    <li><strong>Queue (LinkedQueue):</strong> FIFO data structure with enqueue, dequeue, and peek operations</li>
     <li><strong>Well-documented API:</strong> Comprehensive JavaDoc documentation for all methods and classes</li>
     <li><strong>Exception Safety:</strong> Robust error handling and boundary condition management</li>
     <li><strong>Memory Efficient:</strong> Proper node management and garbage collection friendly</li>
@@ -30,14 +32,18 @@ src/
 │   ├── java/com/gqcod3/datastructures/
 │   │   ├── app/
 │   │   │   └── Main.java                         # Example usage and demonstrations
-│   │   └── lists/
-│   │       ├── singly/
-│   │       │   └── SinglyLinkedList.java         # Singly linked list implementation
-│   │       ├── doubly/
-│   │       │   └── DoublyLinkedList.java         # Doubly linked list implementation
-│   │       └── circular/
-│   │           ├── CircularSinglyLinkedList.java # Circular singly linked list implementation
-│   │           └── CircularDoublyLinkedList.java # Circular doubly linked list implementation
+│   │   ├── lists/
+│   │   │   ├── singly/
+│   │   │   │   └── SinglyLinkedList.java         # Singly linked list implementation
+│   │   │   ├── doubly/
+│   │   │   │   └── DoublyLinkedList.java         # Doubly linked list implementation
+│   │   │   └── circular/
+│   │   │       ├── CircularSinglyLinkedList.java # Circular singly linked list implementation
+│   │   │       └── CircularDoublyLinkedList.java # Circular doubly linked list implementation
+│   │   ├── stack/
+│   │   │   └── LinkedStack.java                  # Stack implementation using linked list
+│   │   └── queue/
+│   │       └── LinkedQueue.java                  # Queue implementation using linked list
 │   └── resources/                                # Resource files
 └── test/
     └── java/                                     # Unit tests (to be implemented)
@@ -153,6 +159,63 @@ A linear data structure where the last node points back to the first node and th
 - Insertion/Deletion (at position): O(n) - optimized based on position
 - Search: O(n)
 - Access by index: O(n)
+
+### 5. Stack (LinkedStack)
+
+A Last-In-First-Out (LIFO) data structure implemented using a linked list. Elements are added and removed from the same end (top of the stack), making it ideal for function calls, expression evaluation, and undo operations.
+
+**Key Features:**
+- Generic type support (`LinkedStack<T>`)
+- LIFO (Last-In-First-Out) behavior
+- Efficient push and pop operations
+- Null element support with safe handling
+- Iterator support for traversal
+
+**Available Methods:**
+- `push(T element)` - Add element to the top of the stack
+- `pop()` - Remove and return the top element
+- `peek()` - View the top element without removing it
+- `isEmpty()` - Check if stack is empty
+- `size()` - Get current number of elements
+- `clear()` - Remove all elements
+- `contains(T element)` - Search for an element
+- `iterator(Consumer<T> action)` - Apply action to each element from top to bottom
+
+**Time Complexity:**
+- Push: O(1)
+- Pop: O(1)
+- Peek: O(1)
+- Search: O(n)
+- Access by index: N/A (not supported in stack)
+
+### 6. Queue (LinkedQueue)
+
+A First-In-First-Out (FIFO) data structure implemented using a linked list. Elements are added at the rear and removed from the front, making it ideal for task scheduling, breadth-first search, and handling requests in order.
+
+**Key Features:**
+- Generic type support (`LinkedQueue<T>`)
+- FIFO (First-In-First-Out) behavior
+- Efficient enqueue and dequeue operations
+- Separate front and rear pointers for optimal performance
+- Null element support with safe handling
+- Iterator support for traversal
+
+**Available Methods:**
+- `enqueue(T element)` - Add element to the rear of the queue
+- `dequeue()` - Remove and return the front element
+- `peek()` - View the front element without removing it
+- `isEmpty()` - Check if queue is empty
+- `size()` - Get current number of elements
+- `clear()` - Remove all elements
+- `contains(T element)` - Search for an element
+- `iterator(Consumer<T> action)` - Apply action to each element from front to rear
+
+**Time Complexity:**
+- Enqueue: O(1)
+- Dequeue: O(1)
+- Peek: O(1)
+- Search: O(n)
+- Access by index: N/A (not supported in queue)
 
 ## Usage Examples
 
@@ -299,6 +362,105 @@ cList.popBack();  // Remove 10
 // (Be careful with infinite loops when implementing your own traversal)
 ```
 
+### Stack (LinkedStack) Example
+
+```java
+import com.gqcod3.datastructures.stack.LinkedStack;
+
+// Create a new stack for strings
+LinkedStack<String> stack = new LinkedStack<>();
+
+// Push elements onto the stack
+stack.push("First");
+stack.push("Second");
+stack.push(null);        // Null values are supported
+stack.push("Third");
+
+// Display the stack contents (from top to bottom)
+System.out.println("Stack contents:");
+// Output: Third -> null -> Second -> First ->
+stack.iterator(element -> System.out.print(element + " -> "));
+System.out.println();
+
+// Peek at the top element without removing
+// Output: Top element: Third
+System.out.println("Top element: " + stack.peek());
+
+// Pop elements
+// Output: Popped: Third
+System.out.println("Popped: " + stack.pop());
+// Output: Popped: null
+System.out.println("Popped: " + stack.pop());
+
+// Check if stack contains an element
+// Output: Contains 'Second': true
+System.out.println("Contains 'Second': " + stack.contains("Second"));
+
+// Check size and if empty
+// Output: Size: 2
+System.out.println("Size: " + stack.size());
+// Output: Is empty: false
+System.out.println("Is empty: " + stack.isEmpty());
+
+// Clear the stack
+stack.clear();
+// Output: Is empty after clear: true
+System.out.println("Is empty after clear: " + stack.isEmpty());
+```
+
+### Queue (LinkedQueue) Example
+
+```java
+import com.gqcod3.datastructures.queue.LinkedQueue;
+
+// Create a new queue for integers
+LinkedQueue<Integer> queue = new LinkedQueue<>();
+
+// Enqueue elements to the queue
+queue.enqueue(10);
+queue.enqueue(20);
+queue.enqueue(null);     // Null values are supported
+queue.enqueue(30);
+
+// Display the queue contents (from front to rear)
+System.out.println("Queue contents:");
+// Output: 10 -> 20 -> null -> 30 ->
+queue.iterator(element -> System.out.print(element + " -> "));
+System.out.println();
+
+// Peek at the front element without removing
+// Output: Front element: 10
+System.out.println("Front element: " + queue.peek());
+
+// Dequeue elements
+// Output: Dequeued: 10
+System.out.println("Dequeued: " + queue.dequeue());
+// Output: Dequeued: 20
+System.out.println("Dequeued: " + queue.dequeue());
+
+// Check if queue contains an element  
+// Output: Contains null: true
+System.out.println("Contains null: " + queue.contains(null));
+// Output: Contains 40: false
+System.out.println("Contains 40: " + queue.contains(40));
+
+// Check size and if empty
+// Output: Size: 2
+System.out.println("Size: " + queue.size());
+// Output: Is empty: false
+System.out.println("Is empty: " + queue.isEmpty());
+
+// Process remaining elements
+while (!queue.isEmpty()) {
+    System.out.println("Processing: " + queue.dequeue());
+}
+// Output: Processing: null
+// Output: Processing: 30
+
+// Output: Is empty after processing: true
+System.out.println("Is empty after processing: " + queue.isEmpty());
+```
+
 ## Building and Running
 
 ### Using Maven
@@ -337,12 +499,17 @@ cList.popBack();  // Remove 10
 - ✅ Doubly Linked List with most core operations
 - ✅ Circular Singly Linked List implementation
 - ✅ Circular Doubly Linked List with lambda function support
-- ✅ Generic type support
+- ✅ Stack (LinkedStack) with full LIFO functionality
+- ✅ Queue (LinkedQueue) with full FIFO functionality
+- ✅ Generic type support across all data structures
+- ✅ Null element support with safe handling
+- ✅ Iterator methods with Consumer functional interface
 - ✅ Comprehensive documentation
 - ✅ Example usage in Main.java
 
 ### In Progress
 - ⚠️ Doubly Linked List `pushFront(T item)` method (TODO)
+- 🔄 Unit tests for all data structures
 
 ## Contributing
 
