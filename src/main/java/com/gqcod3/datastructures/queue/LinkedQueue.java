@@ -116,17 +116,14 @@ public class LinkedQueue<T> {
      * @throws IllegalStateException if the queue is empty.
      */
     public T dequeue() {
-        if (isEmpty()) {
+        if (isEmpty()) 
             throw new IllegalStateException("Queue is empty");
-        }
 
         T data = front.data;
         front = front.next;
         
-        // If queue becomes empty, reset rear to null
-        if (front == null) {
+        if (front == null) 
             rear = null;
-        }
         
         size--;
         return data;
@@ -138,9 +135,8 @@ public class LinkedQueue<T> {
      * @throws IllegalStateException if the queue is empty.
      */
     public T peek() {
-        if (isEmpty()) {
+        if (isEmpty()) 
             throw new IllegalStateException("Queue is empty");
-        }
         return front.data;
     }
 
