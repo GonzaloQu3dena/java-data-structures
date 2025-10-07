@@ -4,6 +4,7 @@ import com.gqcod3.datastructures.lists.circular.CircularDoublyLinkedList;
 import com.gqcod3.datastructures.lists.circular.CircularSinglyLinkedList;
 import com.gqcod3.datastructures.lists.doubly.DoublyLinkedList;
 import com.gqcod3.datastructures.lists.singly.SinglyLinkedList;
+import com.gqcod3.datastructures.queue.LinkedQueue;
 import com.gqcod3.datastructures.stack.LinkedStack;
 
 public class Main {
@@ -64,5 +65,19 @@ public class Main {
         
         System.out.println("\nLinked Stack:");
         stack.iterator(data -> System.out.print(data + " -> "));
+
+        /**
+         * Queue Example
+         */
+        LinkedQueue<String> queue = new LinkedQueue<>();
+        queue.enqueue("A");
+        queue.enqueue("B");
+        queue.enqueue("C");
+        queue.enqueue("D");
+        System.out.println("\nLinked Queue before dequeue:");
+        queue.iterator(data -> System.out.print(data + " -> "));
+        queue.dequeue();
+        System.out.println("\nLinked Queue after dequeue:");
+        queue.iterator(data -> System.out.print(data + " -> "));
     }
 }
